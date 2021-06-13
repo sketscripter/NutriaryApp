@@ -1,8 +1,12 @@
-import 'package:chatapp/widget/widget.dart';
 import 'package:flutter/material.dart';
-import 'package:chatapp/foodApiNetworking.dart';
-import 'package:chatapp/components/card.dart';
+
+
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:flutter/services.dart';
+
+
+import '../components/card.dart';
+import '../foodApiNetworking.dart';
 
 String _apiKey = '3af7176e2eee4afda368dc553f5a47df';
 String _url = 'https://api.spoonacular.com/food/ingredients/search?apiKey=';
@@ -22,7 +26,7 @@ class _CalorieCounterState extends State<CalorieCounter> {
   var fat = 0.0;
   var sugar = 0.0;
 
-  void getData(String query) async {
+  void getData(String query, String amount) async {
     NetworkHelper networkHelper =
         NetworkHelper(url: _url + _apiKey + '&query=' + query);
     var response = await networkHelper.getData();
@@ -31,10 +35,12 @@ class _CalorieCounterState extends State<CalorieCounter> {
             response["results"][0]["id"].toString() +
             '/information?apiKey=' +
             _apiKey +
-            '&amount=100&unit=grams');
+            '&amount=' +
+            amount +
+            '&unit=grams');
     var response2 = await networkHelper2.getData();
     setState(() {
-      calories = response2["nutrition"]["nutrients"][30]["amount"];
+      calories = response2["nutrition"]["nutrients"][31]["amount"];
       fat = response2["nutrition"]["nutrients"][0]["amount"];
       carbs = response2["nutrition"]["nutrients"][4]["amount"];
       sugar = response2["nutrition"]["nutrients"][15]["amount"];
@@ -43,6 +49,7 @@ class _CalorieCounterState extends State<CalorieCounter> {
   }
 
   String food;
+  String amount;
   bool _showSpinner = false;
 
   @override
@@ -62,33 +69,52 @@ class _CalorieCounterState extends State<CalorieCounter> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
                     child: ListTile(
-                      trailing: IconButton(
-                        icon: Icon(Icons.search),
-                        onPressed: () {
-                          setState(() {
-                            _showSpinner = true;
-                          });
-                          getData(food);
-                        },
-                      ),
-                      title: TextField(
-                        decoration: InputDecoration(
-                            hintText: 'Enter food to get its stats',
-                            filled: true,
-                            fillColor: Colors.white,
-                            icon: Icon(
-                              Icons.fastfood,
-                              color: Colors.grey[700],
-                            ),
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                borderSide: BorderSide.none)),
-                        onChanged: (value) {
-                          food = value;
-                        },
-                      ),
-                    ),
+                        trailing: IconButton(
+                          icon: Icon(Icons.search),
+                          onPressed: () {
+                            setState(() {
+                              _showSpinner = true;
+                            });
+                            if (amount == null) {
+                              amount = '0';
+                            }
+                            getData(food, amount);
+                          },
+                        ),
+                        title: TextField(
+                          decoration: InputDecoration(
+                              hintText: 'Enter food name',
+                              filled: true,
+                              fillColor: Colors.white,
+                              icon: Icon(
+                                Icons.fastfood,
+                                color: Colors.grey[700],
+                              ),
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                  borderSide: BorderSide.none)),
+                          onChanged: (value) {
+                            food = value;
+                          },
+                        ),
+                        subtitle: TextFormField(
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                              hintText: 'Enter amount in grams',
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                  borderSide: BorderSide.none)),
+                          onChanged: (value) {
+                            amount = value;
+                          },
+                        )),
                   ),
                 ),
                 Column(
@@ -101,7 +127,6 @@ class _CalorieCounterState extends State<CalorieCounter> {
                     InfoCard(
                       nutrient: "Calories",
                       amount: calories,
-                      type: "g",
                     ),
                     SizedBox(
                       height: 5,
@@ -109,7 +134,6 @@ class _CalorieCounterState extends State<CalorieCounter> {
                     InfoCard(
                       nutrient: "Carbs",
                       amount: carbs,
-                      type: "g",
                     ),
                     SizedBox(
                       height: 5,
@@ -117,7 +141,6 @@ class _CalorieCounterState extends State<CalorieCounter> {
                     InfoCard(
                       nutrient: "Sugar",
                       amount: sugar,
-                      type: "g",
                     ),
                     SizedBox(
                       height: 5,
@@ -125,7 +148,6 @@ class _CalorieCounterState extends State<CalorieCounter> {
                     InfoCard(
                       nutrient: "Fat",
                       amount: fat,
-                      type: "g",
                     ),
                   ],
                 ),

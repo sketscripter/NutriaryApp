@@ -1,11 +1,14 @@
-import 'package:chatapp/widget/widget.dart';
 import 'package:flutter/material.dart';
-import 'package:chatapp/foodApiNetworking.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:chatapp/screens/recommendedMeal.dart';
 
-String _apiKey ='37858fd40dd048ce9a36c24155d78cd0';
-String _url='https://api.spoonacular.com/mealplanner/generate?apiKey=';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
+
+
+import '../foodApiNetworking.dart';
+import 'recommendedMeal.dart';
+
+String _apiKey = '37858fd40dd048ce9a36c24155d78cd0';
+String _url = 'https://api.spoonacular.com/mealplanner/generate?apiKey=';
+String _url2 = 'https://api.spoonacular.com/recipes/';
 //https://api.spoonacular.com/mealplanner/generate?apiKey=37858fd40dd048ce9a36c24155d78cd0&targetCalories=2000&diet=vegan&timeFrame=day
 
 class MealPlanner extends StatefulWidget {
@@ -14,7 +17,6 @@ class MealPlanner extends StatefulWidget {
 }
 
 class _MealPlannerState extends State<MealPlanner> {
-
   List<String> _diets = [
     //List of diets that lets spoonacular filter
     'None',
@@ -33,23 +35,110 @@ class _MealPlannerState extends State<MealPlanner> {
   String _breakfast;
   String _lunch;
   String _dinner;
-  bool _showSpinner=false;
+  String _breakfastimg;
+  String _lunchimg;
+  String _dinnerimg;
+  bool _showSpinner = false;
+  String _calories;
+  String _protein;
+  String _fats;
+  String _carbs;
 
-  Future getData(double target, String diet)async{
-    NetworkHelper networkHelper = NetworkHelper(url: _url+_apiKey+'&targetCalories='+target.toString()+'&diet='+diet+'&timeFrame=day');
-    print( _url+_apiKey+'&targetCalories='+target.toString()+'&diet='+diet+'&timeFrame=day');
+  Future getData(double target, String diet) async {
+    NetworkHelper networkHelper = NetworkHelper(
+        url: _url +
+            _apiKey +
+            '&targetCalories=' +
+            target.toString() +
+            '&diet=' +
+            diet +
+            '&timeFrame=day');
+
+    print(_url +
+        _apiKey +
+        '&targetCalories=' +
+        target.toString() +
+        '&diet=' +
+        diet +
+        '&timeFrame=day');
     var response = await networkHelper.getData();
-    if(response!=null) {
+
+    if (response != null) {
       print(response);
       _breakfast = response['meals'][0]['title'];
       _lunch = response['meals'][1]['title'];
       _dinner = response['meals'][2]['title'];
+      _calories = response['nutrients']['calories'].toString();
+      _protein = response['nutrients']['protein'].toString();
+      _carbs = response['nutrients']['carbohydrates'].toString();
+      _fats = response['nutrients']['fat'].toString();
       setState(() {
-        _showSpinner=false;
+        _showSpinner = false;
+      });
+    }
+    NetworkHelper networkHelper2 = NetworkHelper(
+        url: _url2 +
+            response['meals'][0]['id'].toString() +
+            '/information?apiKey=' +
+            _apiKey +
+            '&includeNutrition=false');
+    print(_url2 +
+        response['meals'][0]['id'].toString() +
+        '/information?apiKey=' +
+        _apiKey +
+        '&includeNutrition=false');
+    var response2 = await networkHelper2.getData();
+    if (response2 != null) {
+      print(response2);
+      _breakfastimg = response2['image'].toString();
+
+      setState(() {
+        _showSpinner = false;
+      });
+    }
+
+    NetworkHelper networkHelper3 = NetworkHelper(
+        url: _url2 +
+            response['meals'][1]['id'].toString() +
+            '/information?apiKey=' +
+            _apiKey +
+            '&includeNutrition=false');
+    print(_url2 +
+        response['meals'][1]['id'].toString() +
+        '/information?apiKey=' +
+        _apiKey +
+        '&includeNutrition=false');
+    var response3 = await networkHelper3.getData();
+    if (response3 != null) {
+      print(response3);
+      _lunchimg = response3['image'].toString();
+
+      setState(() {
+        _showSpinner = false;
+      });
+    }
+
+    NetworkHelper networkHelper4 = NetworkHelper(
+        url: _url2 +
+            response['meals'][2]['id'].toString() +
+            '/information?apiKey=' +
+            _apiKey +
+            '&includeNutrition=false');
+    print(_url2 +
+        response['meals'][2]['id'].toString() +
+        '/information?apiKey=' +
+        _apiKey +
+        '&includeNutrition=false');
+    var response4 = await networkHelper4.getData();
+    if (response4 != null) {
+      print(response4);
+      _dinnerimg = response4['image'].toString();
+
+      setState(() {
+        _showSpinner = false;
       });
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +161,8 @@ class _MealPlannerState extends State<MealPlanner> {
                 //Text widget for our app's title
                 Text(
                   'My Daily Meal Planner',
-                  style: TextStyle(fontSize: 32,
+                  style: TextStyle(
+                      fontSize: 32,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 2),
                 ),
@@ -81,23 +171,20 @@ class _MealPlannerState extends State<MealPlanner> {
                 //A RichText to style the target calories
                 RichText(
                   text: TextSpan(
-                      style: Theme.of(context).textTheme.body1.copyWith(fontSize: 25),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText2
+                          .copyWith(fontSize: 25),
                       children: [
                         TextSpan(
-                            text:  _targetCalories.truncate().toString(),
+                            text: _targetCalories.truncate().toString(),
                             style: TextStyle(
                                 color: Color(0xFF47F000),
-                                fontWeight: FontWeight.bold
-                            )
-                        ),
+                                fontWeight: FontWeight.bold)),
                         TextSpan(
                             text: 'cal',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600
-                            )
-                        ),
-                      ]
-                  ),
+                            style: TextStyle(fontWeight: FontWeight.w600)),
+                      ]),
                 ),
                 //Orange slider that sets our target calories
                 SliderTheme(
@@ -113,8 +200,7 @@ class _MealPlannerState extends State<MealPlanner> {
                     value: _targetCalories,
                     onChanged: (value) => setState(() {
                       _targetCalories = value.round().toDouble();
-                    }
-                    ),
+                    }),
                   ),
                 ),
                 //Simple drop down to select the type of diet
@@ -126,10 +212,7 @@ class _MealPlannerState extends State<MealPlanner> {
                         value: priority,
                         child: Text(
                           priority,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18
-                          ),
+                          style: TextStyle(color: Colors.black, fontSize: 18),
                         ),
                       );
                     }).toList(),
@@ -155,22 +238,34 @@ class _MealPlannerState extends State<MealPlanner> {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Text(
-                    'Search', style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600,
-                  ),
+                    'Search',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   //_searchMealPlan function is above the build method
-                  onPressed: ()async{
+                  onPressed: () async {
                     setState(() {
-                      _showSpinner=true;
+                      _showSpinner = true;
                     });
                     await getData(_targetCalories, _diet);
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>RecommendedMealPlan(breakfast: _breakfast,
-                      lunch: _lunch,
-                      dinner: _dinner,
-                    )));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RecommendedMealPlan(
+                                  breakfast: _breakfast,
+                                  lunch: _lunch,
+                                  dinner: _dinner,
+                                  breakfastimg: _breakfastimg,
+                                  lunchimg: _lunchimg,
+                                  dinnerimg: _dinnerimg,
+                                  calories: _calories,
+                                  fats: _fats,
+                                  carbs: _carbs,
+                                  protein: _protein,
+                                )));
                   },
                 ),
               ],
