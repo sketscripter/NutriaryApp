@@ -2,7 +2,6 @@ import 'package:chatapp/views/chatrooms.dart';
 import 'package:chatapp/widget/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:chatapp/screens/mealPlanner.dart';
-import 'package:chatapp/screens/chatbot.dart';
 import 'package:chatapp/screens/calorieCounter.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:chatapp/components/drawer.dart';
@@ -26,6 +25,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color(0xFF47F000),
+        appBar: appBarMain(context),
         drawer: MainDrawer(),
         bottomNavigationBar: CurvedNavigationBar(
           index: pageNumber,

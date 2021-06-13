@@ -49,7 +49,6 @@ class _CalorieCounterState extends State<CalorieCounter> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF47F000),
-      appBar: appBarMain(context),
       body: ModalProgressHUD(
         inAsyncCall: _showSpinner,
         child: Center(

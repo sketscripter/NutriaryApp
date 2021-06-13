@@ -55,7 +55,6 @@ class _MealPlannerState extends State<MealPlanner> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF47F000),
-      appBar: appBarMain(context),
       body: ModalProgressHUD(
         inAsyncCall: _showSpinner,
         child: Center(
