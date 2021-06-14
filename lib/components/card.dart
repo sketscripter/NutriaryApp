@@ -17,7 +17,7 @@ class InfoCard extends StatelessWidget {
       color: Colors.grey[200],
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 70),
-        child: Text('$nutrient = $amount $type',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+        child: Text('$nutrient = $amount g',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
       ),
     );
   }

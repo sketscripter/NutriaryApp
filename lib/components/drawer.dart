@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../helper/authenticate.dart';
+import '../services/auth.dart';
+
 class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -14,13 +17,13 @@ class MainDrawer extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Container(
-                    width: 100,
+                    width: 200,
                     height: 100,
                     margin: EdgeInsets.only(top: 30),
                     decoration: BoxDecoration(
-                      shape: BoxShape.circle,
+                      
                       image: DecorationImage(
-                        image: AssetImage('assets/images/healthrx.png'),
+                        image: AssetImage('assets/images/logo.png'),
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -36,6 +39,18 @@ class MainDrawer extends StatelessWidget {
             onTap: (){
               Navigator.pushNamed(context,'/bmiInput');
             },
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 540, 0, 0),
+            child: ListTile(
+              leading: Icon(Icons.logout, size: 35,),
+              title: Text('Deconexion',style: TextStyle(fontSize: 20),),
+              onTap: (){
+               AuthService().signOut();
+        Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => Authenticate()));
+              },
+            ),
           )
 
         ],

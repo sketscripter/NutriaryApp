@@ -1,7 +1,23 @@
 import 'package:flutter/material.dart';
 
+import '../helper/authenticate.dart';
+import '../services/auth.dart';
+
 Widget appBarMain(BuildContext context) {
   return AppBar(
+    actions: <Widget>[
+    IconButton(
+      icon: Icon(
+        Icons.logout,
+        color: Colors.black,
+      ),
+      onPressed: () {
+       AuthService().signOut();
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => Authenticate()));
+      },
+    )
+  ],
     title: Image.asset(
       "assets/images/logo.png",
       height: 40,

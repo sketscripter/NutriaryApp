@@ -1,4 +1,12 @@
+
+import 'package:chatapp/recipe/RecipeDetails.dart';
+import 'package:chatapp/recipe/RecipeMode.dart';
 import 'package:flutter/material.dart';
+
+import 'loginPage.dart';
+
+
+
 
 class RecommendedMealPlan extends StatelessWidget {
   final breakfast;
@@ -26,11 +34,11 @@ class RecommendedMealPlan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purpleAccent,
+      backgroundColor: Color(0xFF47F000),
       appBar: AppBar(
         title: Text('Nutriary'),
         centerTitle: true,
-        backgroundColor: Colors.purple,
+        backgroundColor: Color(0xFF47F000),
       ),
       body: Column(
         children: <Widget>[
@@ -65,25 +73,36 @@ class RecommendedMealPlan extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Card(
-                 clipBehavior:Clip.antiAlias,
-      child: Column(
-        children: [
-          Padding(padding: EdgeInsets.fromLTRB(100, 10, 100, 5),
-                      child: Text(" Lunch - $lunch",
-            style: TextStyle(
-              fontWeight: FontWeight.bold
-            ),
-            ),
-          ),
-          Expanded(
-                      child: Image(
-              
-              image: NetworkImage(lunchimg,),
-              fit: BoxFit.fill,
+                     clipBehavior:Clip.antiAlias,
+      child: FlatButton(
+           onPressed: (){
+                  Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RecipeDetails(
+                            recipeModel: RecipeModel.demoRecipe[1],
+                          ),
+                        ));
+                },
+              child: Column(
+          children: [
+            Padding(padding: EdgeInsets.fromLTRB(100, 10, 100, 5),
+                            child: Text(" Lunch - $lunch",
+              style: TextStyle(
+                    fontWeight: FontWeight.bold
               ),
-          )
+              ),
+            ),
+            Expanded(
+                            child: Image(
+                    
+                    image: NetworkImage(lunchimg,),
+                    fit: BoxFit.fill,
+                    ),
+            )
 
-        ],
+          ],
+        ),
       ),
     ),
             ),
