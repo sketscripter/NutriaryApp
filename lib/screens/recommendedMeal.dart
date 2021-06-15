@@ -21,6 +21,7 @@ class RecommendedMealPlan extends StatelessWidget {
   final bscore;
   final btime;
   final bserve;
+  final bsummary;
 
   RecommendedMealPlan({
     this.breakfast,
@@ -39,6 +40,7 @@ class RecommendedMealPlan extends StatelessWidget {
     this.bscore,
     this.btime,
     this.bserve,
+    this.bsummary,
   });
   @override
   Widget build(BuildContext context) {
@@ -94,7 +96,8 @@ class RecommendedMealPlan extends StatelessWidget {
                             bscore: bscore,
                             btime: btime,
                             bserve: bserve,
-                            breakfastimg:breakfastimg,
+                            breakfastimg: breakfastimg,
+                            bsummary: bsummary,
                           ),
                         ));
                   },

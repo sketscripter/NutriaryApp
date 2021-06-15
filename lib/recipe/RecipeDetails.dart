@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'dart:math';
+import 'package:flutter_html/flutter_html.dart';
 
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
@@ -14,6 +14,7 @@ class RecipeDetails extends StatelessWidget {
   final btime;
   final bserve;
   final breakfastimg;
+  final bsummary;
 
   RecipeDetails({
     this.bingredientlist,
@@ -23,6 +24,7 @@ class RecipeDetails extends StatelessWidget {
     this.btime,
     this.bserve,
     this.breakfastimg,
+    this.bsummary,
   });
 
   @override
@@ -122,7 +124,7 @@ class RecipeDetails extends StatelessWidget {
               ),
               Expanded(
                 child: DefaultTabController(
-                  length: 2,
+                  length: 3,
                   initialIndex: 0,
                   child: Column(
                     children: [
@@ -135,6 +137,9 @@ class RecipeDetails extends StatelessWidget {
                           ),
                           Tab(
                             text: "Ingredients US".toUpperCase(),
+                          ),
+                          Tab(
+                            text: "Summary".toUpperCase(),
                           ),
                         ],
                         labelColor: Colors.black,
@@ -232,6 +237,9 @@ class RecipeDetails extends StatelessWidget {
                                   ],
                                 ),
                               ),
+                            ),
+                            Container(
+                              child: Html(data: bsummary),
                             ),
                           ],
                         ),

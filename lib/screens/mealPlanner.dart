@@ -48,6 +48,7 @@ class _MealPlannerState extends State<MealPlanner> {
   int _btime;
   int _bserve;
   List<dynamic> bingredients;
+  String bsummary;
 
   Future getData(double target, String diet) async {
     NetworkHelper networkHelper = NetworkHelper(
@@ -102,6 +103,7 @@ class _MealPlannerState extends State<MealPlanner> {
       _bscore = response2['spoonacularScore'];
       _btime = response2['readyInMinutes'];
       _bserve = response2['servings'];
+      bsummary = response2['summary'];
 
       setState(() {
         _showSpinner = false;
@@ -282,6 +284,7 @@ class _MealPlannerState extends State<MealPlanner> {
                                   bscore: _bscore,
                                   btime: _btime,
                                   bserve: _bserve,
+                                  bsummary: bsummary,
                                 )));
                   },
                 ),

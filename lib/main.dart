@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
       //   ),
       // ),
       routes: {
-        '/': (context) => SplashScreen(),
+        '/': (context) => MealPlanner(),
         '/register': (context) => RegistrationPage(),
         '/login': (context) => LoginPage(),
         '/dashboard': (context) => Dashboard(),
