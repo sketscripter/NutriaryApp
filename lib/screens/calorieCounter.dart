@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:flutter/services.dart';
-
 
 import '../components/card.dart';
 import '../foodApiNetworking.dart';
@@ -40,10 +38,10 @@ class _CalorieCounterState extends State<CalorieCounter> {
             '&unit=grams');
     var response2 = await networkHelper2.getData();
     setState(() {
-      calories = response2["nutrition"]["nutrients"][31]["amount"];
-      fat = response2["nutrition"]["nutrients"][0]["amount"];
-      carbs = response2["nutrition"]["nutrients"][4]["amount"];
-      sugar = response2["nutrition"]["nutrients"][15]["amount"];
+      calories = response2["nutrition"]["nutrients"][8]["amount"];
+      fat = response2["nutrition"]["nutrients"][7]["amount"];
+      carbs = response2["nutrition"]["nutrients"][13]["amount"];
+      sugar = response2["nutrition"]["nutrients"][16]["amount"];
       _showSpinner = false;
     });
   }
@@ -73,11 +71,11 @@ class _CalorieCounterState extends State<CalorieCounter> {
                           icon: Icon(Icons.search),
                           onPressed: () {
                             setState(() {
+                              if (amount == null) {
+                                amount = '0';
+                              }
                               _showSpinner = true;
                             });
-                            if (amount == null) {
-                              amount = '0';
-                            }
                             getData(food, amount);
                           },
                         ),

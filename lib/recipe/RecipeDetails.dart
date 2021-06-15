@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'dart:math';
 
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
@@ -121,7 +122,7 @@ class RecipeDetails extends StatelessWidget {
               ),
               Expanded(
                 child: DefaultTabController(
-                  length: 3,
+                  length: 2,
                   initialIndex: 0,
                   child: Column(
                     children: [
@@ -130,13 +131,10 @@ class RecipeDetails extends StatelessWidget {
                         indicatorColor: Colors.red,
                         tabs: [
                           Tab(
-                            text: "Ingredients".toUpperCase(),
+                            text: "Ingredients metric".toUpperCase(),
                           ),
                           Tab(
-                            text: "Preparation".toUpperCase(),
-                          ),
-                          Tab(
-                            text: "Reviews".toUpperCase(),
+                            text: "Ingredients US".toUpperCase(),
                           ),
                         ],
                         labelColor: Colors.black,
@@ -176,8 +174,15 @@ class RecipeDetails extends StatelessWidget {
                                           padding: const EdgeInsets.symmetric(
                                             vertical: 2.0,
                                           ),
-                                          child: Text(
-                                              bingredientlist[index]['name']),
+                                          child: Text(bingredientlist[index]
+                                                  ['name'] +
+                                              ' ' +
+                                              bingredientlist[index]['measures']
+                                                      ['metric']['amount']
+                                                  .toString() +
+                                              ' ' +
+                                              bingredientlist[index]['measures']
+                                                  ['metric']['unitShort']),
                                         );
                                       },
                                       separatorBuilder:
@@ -192,10 +197,41 @@ class RecipeDetails extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              child: Text("Preparation Tab"),
-                            ),
-                            Container(
-                              child: Text("Reviews Tab"),
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 12.0),
+                                child: Wrap(
+                                  children: [
+                                    ListView.separated(
+                                      shrinkWrap: true,
+                                      physics: ScrollPhysics(),
+                                      itemCount: bingredientlist.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 2.0,
+                                          ),
+                                          child: Text(bingredientlist[index]
+                                                  ['name'] +
+                                              ' ' +
+                                              bingredientlist[index]['measures']
+                                                      ['us']['amount']
+                                                  .toString() +
+                                              ' ' +
+                                              bingredientlist[index]['measures']
+                                                  ['us']['unitShort']),
+                                        );
+                                      },
+                                      separatorBuilder:
+                                          (BuildContext context, int index) {
+                                        return Divider(
+                                            color:
+                                                Colors.black.withOpacity(0.3));
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ],
                         ),

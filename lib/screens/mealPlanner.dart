@@ -5,7 +5,7 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import '../foodApiNetworking.dart';
 import 'recommendedMeal.dart';
 
-String _apiKey = '37858fd40dd048ce9a36c24155d78cd0';
+String _apiKey = '3af7176e2eee4afda368dc553f5a47df';
 String _url = 'https://api.spoonacular.com/mealplanner/generate?apiKey=';
 String _url2 = 'https://api.spoonacular.com/recipes/';
 //https://api.spoonacular.com/mealplanner/generate?apiKey=37858fd40dd048ce9a36c24155d78cd0&targetCalories=2000&diet=vegan&timeFrame=day
@@ -99,7 +99,7 @@ class _MealPlannerState extends State<MealPlanner> {
       bingredients = response2['extendedIngredients'];
       _btitle = response2['title'];
       _bsource = response2['sourceName'];
-      _bscore = response2['healthScore'];
+      _bscore = response2['spoonacularScore'];
       _btime = response2['readyInMinutes'];
       _bserve = response2['servings'];
 
