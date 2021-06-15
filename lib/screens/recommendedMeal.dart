@@ -1,12 +1,8 @@
-
 import 'package:chatapp/recipe/RecipeDetails.dart';
 import 'package:chatapp/recipe/RecipeMode.dart';
 import 'package:flutter/material.dart';
 
 import 'loginPage.dart';
-
-
-
 
 class RecommendedMealPlan extends StatelessWidget {
   final breakfast;
@@ -19,18 +15,21 @@ class RecommendedMealPlan extends StatelessWidget {
   final protein;
   final carbs;
   final fats;
-  RecommendedMealPlan(
-      {this.breakfast,
-      this.lunch,
-      this.dinner,
-      this.breakfastimg,
-      this.lunchimg,
-      this.dinnerimg,
-      this.calories,
-      this.carbs,
-      this.fats,
-      this.protein,
-      });
+
+  final ingredients;
+  RecommendedMealPlan({
+    this.breakfast,
+    this.lunch,
+    this.dinner,
+    this.breakfastimg,
+    this.lunchimg,
+    this.dinnerimg,
+    this.calories,
+    this.carbs,
+    this.fats,
+    this.protein,
+    this.ingredients,
+  });
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,171 +45,162 @@ class RecommendedMealPlan extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Card(
-                 clipBehavior:Clip.antiAlias,
-      child: Column(
-        children: [
-          Padding(padding: EdgeInsets.fromLTRB(100, 10, 100, 5),
-                      child: Text(" Breakfast - $breakfast",
-            style: TextStyle(
-              fontWeight: FontWeight.bold
-            ),
-            ),
-          ),
-          Expanded(
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(100, 10, 100, 5),
+                      child: Text(
+                        " Breakfast - $breakfast",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Expanded(
                       child: Image(
-              
-              image: NetworkImage(breakfastimg),
-              fit: BoxFit.fill,
+                        image: NetworkImage(breakfastimg),
+                        fit: BoxFit.fill,
+                      ),
+                    )
+                  ],
+                ),
               ),
-          )
-
-        ],
-      ),
-    ),
             ),
           ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Card(
-                     clipBehavior:Clip.antiAlias,
-      child: FlatButton(
-           onPressed: (){
-                  Navigator.push(
+                clipBehavior: Clip.antiAlias,
+                child: FlatButton(
+                  onPressed: () {
+                    print(ingredients);
+                    Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => RecipeDetails(
-                            recipeModel: RecipeModel.demoRecipe[1],
+                            ingredientlist: ingredients,
                           ),
                         ));
-                },
-              child: Column(
-          children: [
-            Padding(padding: EdgeInsets.fromLTRB(100, 10, 100, 5),
-                            child: Text(" Lunch - $lunch",
-              style: TextStyle(
-                    fontWeight: FontWeight.bold
+                  },
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(100, 10, 100, 5),
+                        child: Text(
+                          " Lunch - $lunch",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Expanded(
+                        child: Image(
+                          image: NetworkImage(
+                            lunchimg,
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ),
-              ),
-            ),
-            Expanded(
-                            child: Image(
-                    
-                    image: NetworkImage(lunchimg,),
-                    fit: BoxFit.fill,
-                    ),
-            )
-
-          ],
-        ),
-      ),
-    ),
             ),
           ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Card(
-                 clipBehavior:Clip.antiAlias,
-      child: Column(
-        children: [
-          Padding(padding: EdgeInsets.fromLTRB(100, 10, 100, 5),
-                      child: Text(" Dinner - $dinner",
-            style: TextStyle(
-              fontWeight: FontWeight.bold
-            ),
-            ),
-          ),
-          Expanded(
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(100, 10, 100, 5),
+                      child: Text(
+                        " Dinner - $dinner",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Expanded(
                       child: Image(
-              
-              image: NetworkImage(dinnerimg),
-              fit: BoxFit.fill,
+                        image: NetworkImage(dinnerimg),
+                        fit: BoxFit.fill,
+                      ),
+                    )
+                  ],
+                ),
               ),
-          )
-
-        ],
-      ),
-    ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Card(
-               clipBehavior:Clip.antiAlias,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(padding: EdgeInsets.fromLTRB(10, 10, 10, 5),
+              clipBehavior: Clip.antiAlias,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 5),
                     child: Column(
                       children: [
-                        Text(" Proteins:",
-          style: TextStyle(
-            fontWeight: FontWeight.bold
-          ),
-          ),
-          Text("$protein g",
-          style: TextStyle(
-            fontWeight: FontWeight.bold
-          ),
-          ),
+                        Text(
+                          " Proteins:",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "$protein g",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ],
                     ),
-          ),
-          Padding(padding: EdgeInsets.fromLTRB(10, 10, 10, 5),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 5),
                     child: Column(
                       children: [
-                        Text(" calories:" ,
-          style: TextStyle(
-            fontWeight: FontWeight.bold
-          ),
-          ),
-          Text("$calories kcal" ,
-          style: TextStyle(
-            fontWeight: FontWeight.bold
-          ),
-          ),
+                        Text(
+                          " calories:",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "$calories kcal",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ],
                     ),
-          ),
-          Padding(padding: EdgeInsets.fromLTRB(10, 10, 10, 5),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 5),
                     child: Column(
                       children: [
-                        Text(" carbs:",
-          style: TextStyle(
-            fontWeight: FontWeight.bold
-          ),
-          ),
-            Text("$carbs g",
-          style: TextStyle(
-            fontWeight: FontWeight.bold
-          ),
-          ),
+                        Text(
+                          " carbs:",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "$carbs g",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ],
                     ),
-          ),
-          Padding(padding: EdgeInsets.fromLTRB(10, 10, 10, 5),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 5),
                     child: Column(
                       children: [
-                        Text(" fats:",
-          style: TextStyle(
-            fontWeight: FontWeight.bold
-          ),
-          ),
-          Text("$fats g",
-          style: TextStyle(
-            fontWeight: FontWeight.bold
-          ),
-          ),
+                        Text(
+                          " fats:",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "$fats g",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ],
                     ),
+                  ),
+                ],
+              ),
+            ),
           ),
-          
-        ],
-      ),
-    ),
-          ),
-          
         ],
       ),
     );

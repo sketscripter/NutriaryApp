@@ -330,8 +330,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Center(
-                                child: Lottie.asset('assets/images/hamburger.json'),
-
+                                child: Lottie.asset(
+                                    'assets/images/hamburger.json'),
                               ),
                               SizedBox(height: 30.0),
                               Text(
@@ -352,8 +352,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Center(
-                                child:
-                                Lottie.asset('assets/images/healthy-or-junk-food.json'),
+                                child: Lottie.asset(
+                                    'assets/images/healthy-or-junk-food.json'),
                               ),
                               SizedBox(height: 30.0),
                               Text(
@@ -374,7 +374,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Center(
-                                child: Lottie.asset('assets/images/food-prepared-food.json'),
+                                child: Lottie.asset(
+                                    'assets/images/food-prepared-food.json'),
                               ),
                               SizedBox(height: 30.0),
                               Text(
@@ -438,23 +439,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ),
       bottomSheet: _currentPage == _numPages - 1
           ? Container(
-        height: 100.0,
-        width: double.infinity,
-        color: Colors.white,
-        child: GestureDetector(
-          onTap: () => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => Authenticate()),
-          ),
-          child: Container(
-                  decoration: BoxDecoration(
-                      color : Color(0xFFE5F791)
-
-                  ),
+              height: 100.0,
+              width: double.infinity,
+              color: Colors.white,
+              child: GestureDetector(
+                onTap: () => Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => Authenticate()),
+                ),
+                child: Container(
+                  decoration: BoxDecoration(color: Color(0xFFE5F791)),
                   child: Center(
-
                     child: Padding(
-
                       padding: EdgeInsets.only(bottom: 30.0),
                       child: Text(
                         'Get started',
@@ -464,11 +460,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      ),
                     ),
-          ),
-        ),
-      )
+                  ),
+                ),
+              ),
+            )
           : Text(''),
     );
   }

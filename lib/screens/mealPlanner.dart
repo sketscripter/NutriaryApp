@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
-
 import '../foodApiNetworking.dart';
 import 'recommendedMeal.dart';
 
@@ -43,6 +42,8 @@ class _MealPlannerState extends State<MealPlanner> {
   String _protein;
   String _fats;
   String _carbs;
+  String _ingredient1;
+  List<dynamic> ingredients;
 
   Future getData(double target, String diet) async {
     NetworkHelper networkHelper = NetworkHelper(
@@ -91,6 +92,7 @@ class _MealPlannerState extends State<MealPlanner> {
     if (response2 != null) {
       print(response2);
       _breakfastimg = response2['image'].toString();
+      ingredients = response2['extendedIngredients'];      
 
       setState(() {
         _showSpinner = false;
@@ -265,6 +267,7 @@ class _MealPlannerState extends State<MealPlanner> {
                                   fats: _fats,
                                   carbs: _carbs,
                                   protein: _protein,
+                                  ingredients:ingredients,
                                 )));
                   },
                 ),

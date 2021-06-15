@@ -3,6 +3,7 @@ import 'package:chatapp/helper/helperfunctions.dart';
 import 'package:chatapp/screens/dashboard.dart';
 import 'package:chatapp/screens/input_page.dart';
 import 'package:chatapp/screens/loginPage.dart';
+import 'package:chatapp/screens/mealPlanner.dart';
 import 'package:chatapp/screens/registrationPage.dart';
 import 'package:chatapp/screens/splash.dart';
 import 'package:chatapp/screens/welcomeScreen.dart';
@@ -20,7 +21,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   bool userIsLoggedIn;
 
   @override
@@ -30,9 +30,9 @@ class _MyAppState extends State<MyApp> {
   }
 
   getLoggedInState() async {
-    await HelperFunctions.getUserLoggedInSharedPreference().then((value){
+    await HelperFunctions.getUserLoggedInSharedPreference().then((value) {
       setState(() {
-        userIsLoggedIn  = value;
+        userIsLoggedIn = value;
       });
     });
   }
@@ -56,12 +56,11 @@ class _MyAppState extends State<MyApp> {
       //   ),
       // ),
       routes: {
-        '/': (context)=>SplashScreen(),
-        '/register': (context)=> RegistrationPage(),
-        '/login': (context)=> LoginPage(),
-        '/dashboard': (context)=> Dashboard(),
-        '/bmiInput':(context)=>InputPage(),
-
+        '/': (context) => SplashScreen(),
+        '/register': (context) => RegistrationPage(),
+        '/login': (context) => LoginPage(),
+        '/dashboard': (context) => Dashboard(),
+        '/bmiInput': (context) => InputPage(),
       },
     );
   }

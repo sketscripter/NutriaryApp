@@ -5,12 +5,11 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
-import 'RecipeMode.dart';
-
 class RecipeDetails extends StatelessWidget {
-  final RecipeModel recipeModel;
+  final List ingredientlist;
+
   RecipeDetails({
-    @required this.recipeModel,
+    this.ingredientlist,
   });
 
   @override
@@ -48,14 +47,14 @@ class RecipeDetails extends StatelessWidget {
                 height: 30,
               ),
               Text(
-                recipeModel.title,
+                "title",
                 style: _textTheme.headline6,
               ),
               SizedBox(
                 height: 10,
               ),
               Text(
-                recipeModel.writer,
+                "writer",
                 style: _textTheme.caption,
               ),
               SizedBox(
@@ -71,7 +70,7 @@ class RecipeDetails extends StatelessWidget {
                     width: 5,
                   ),
                   Text(
-                    "198",
+                    "healthscore",
                     // style: _textTheme.caption,
                   ),
                   SizedBox(
@@ -84,7 +83,7 @@ class RecipeDetails extends StatelessWidget {
                     width: 4,
                   ),
                   Text(
-                    recipeModel.cookingTime.toString() + '\'',
+                    "cooking time",
                   ),
                   SizedBox(
                     width: 20,
@@ -98,7 +97,7 @@ class RecipeDetails extends StatelessWidget {
                     width: 10,
                   ),
                   Text(
-                    recipeModel.servings.toString() + ' Servings',
+                    "n " + ' Servings',
                   ),
                 ],
               ),
@@ -150,7 +149,36 @@ class RecipeDetails extends StatelessWidget {
                       Expanded(
                         child: TabBarView(
                           children: [
-                            Ingredients(recipeModel: recipeModel),
+                            Container(
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 12.0),
+                                child: Wrap(
+                                  children: [
+                                    ListView.separated(
+                                      shrinkWrap: true,
+                                      physics: ScrollPhysics(),
+                                      itemCount: ingredientlist.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 2.0,
+                                          ),
+                                          child: Text(
+                                              ingredientlist[index]['name']),
+                                        );
+                                      },
+                                      separatorBuilder:
+                                          (BuildContext context, int index) {
+                                        return Divider(
+                                            color:
+                                                Colors.black.withOpacity(0.3));
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                             Container(
                               child: Text("Preparation Tab"),
                             ),
@@ -174,13 +202,13 @@ class RecipeDetails extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Hero(
-                    tag: recipeModel.imgPath,
+                    tag: "recipeModel.imgPath",
                     child: ClipRRect(
-                      child: Image(
+                      child: Image.network(
+                        "https://solidstarts.com/wp-content/uploads/when-can-babies-eat-eggs-480x320.jpg",
                         width: double.infinity,
                         height: (size.height / 2) + 50,
                         fit: BoxFit.cover,
-                        image: AssetImage(recipeModel.imgPath),
                       ),
                     ),
                   ),
@@ -212,44 +240,6 @@ class RecipeDetails extends StatelessWidget {
         ),
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-}
-
-class Ingredients extends StatelessWidget {
-  const Ingredients({
-    Key key,
-    @required this.recipeModel,
-  }) : super(key: key);
-
-  final RecipeModel recipeModel;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 12.0),
-        child: Column(
-          children: [
-            ListView.separated(
-              shrinkWrap: true,
-              physics: ScrollPhysics(),
-              itemCount: recipeModel.ingredients.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 2.0,
-                  ),
-                  child: Text('⚫️ ' + recipeModel.ingredients[index]),
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return Divider(color: Colors.black.withOpacity(0.3));
-              },
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
