@@ -15,8 +15,13 @@ class RecommendedMealPlan extends StatelessWidget {
   final protein;
   final carbs;
   final fats;
+  final bingredients;
+  final btitle;
+  final bsource;
+  final bscore;
+  final btime;
+  final bserve;
 
-  final ingredients;
   RecommendedMealPlan({
     this.breakfast,
     this.lunch,
@@ -28,7 +33,12 @@ class RecommendedMealPlan extends StatelessWidget {
     this.carbs,
     this.fats,
     this.protein,
-    this.ingredients,
+    this.bingredients,
+    this.btitle,
+    this.bsource,
+    this.bscore,
+    this.btime,
+    this.bserve,
   });
   @override
   Widget build(BuildContext context) {
@@ -73,12 +83,18 @@ class RecommendedMealPlan extends StatelessWidget {
                 clipBehavior: Clip.antiAlias,
                 child: FlatButton(
                   onPressed: () {
-                    print(ingredients);
+                    print(bingredients);
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => RecipeDetails(
-                            ingredientlist: ingredients,
+                            bingredientlist: bingredients,
+                            btitle: btitle,
+                            bsource: bsource,
+                            bscore: bscore,
+                            btime: btime,
+                            bserve: bserve,
+                            breakfastimg:breakfastimg,
                           ),
                         ));
                   },

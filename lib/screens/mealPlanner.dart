@@ -42,8 +42,12 @@ class _MealPlannerState extends State<MealPlanner> {
   String _protein;
   String _fats;
   String _carbs;
-  String _ingredient1;
-  List<dynamic> ingredients;
+  String _btitle;
+  String _bsource;
+  double _bscore;
+  int _btime;
+  int _bserve;
+  List<dynamic> bingredients;
 
   Future getData(double target, String diet) async {
     NetworkHelper networkHelper = NetworkHelper(
@@ -92,7 +96,12 @@ class _MealPlannerState extends State<MealPlanner> {
     if (response2 != null) {
       print(response2);
       _breakfastimg = response2['image'].toString();
-      ingredients = response2['extendedIngredients'];      
+      bingredients = response2['extendedIngredients'];
+      _btitle = response2['title'];
+      _bsource = response2['sourceName'];
+      _bscore = response2['healthScore'];
+      _btime = response2['readyInMinutes'];
+      _bserve = response2['servings'];
 
       setState(() {
         _showSpinner = false;
@@ -267,7 +276,12 @@ class _MealPlannerState extends State<MealPlanner> {
                                   fats: _fats,
                                   carbs: _carbs,
                                   protein: _protein,
-                                  ingredients:ingredients,
+                                  bingredients: bingredients,
+                                  btitle: _btitle,
+                                  bsource: _bsource,
+                                  bscore: _bscore,
+                                  btime: _btime,
+                                  bserve: _bserve,
                                 )));
                   },
                 ),

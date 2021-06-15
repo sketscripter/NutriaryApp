@@ -6,10 +6,22 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 class RecipeDetails extends StatelessWidget {
-  final List ingredientlist;
+  final bingredientlist;
+  final btitle;
+  final bsource;
+  final bscore;
+  final btime;
+  final bserve;
+  final breakfastimg;
 
   RecipeDetails({
-    this.ingredientlist,
+    this.bingredientlist,
+    this.btitle,
+    this.bsource,
+    this.bscore,
+    this.btime,
+    this.bserve,
+    this.breakfastimg,
   });
 
   @override
@@ -47,14 +59,14 @@ class RecipeDetails extends StatelessWidget {
                 height: 30,
               ),
               Text(
-                "title",
+                btitle,
                 style: _textTheme.headline6,
               ),
               SizedBox(
                 height: 10,
               ),
               Text(
-                "writer",
+                bsource,
                 style: _textTheme.caption,
               ),
               SizedBox(
@@ -70,7 +82,7 @@ class RecipeDetails extends StatelessWidget {
                     width: 5,
                   ),
                   Text(
-                    "healthscore",
+                    bscore.toString(),
                     // style: _textTheme.caption,
                   ),
                   SizedBox(
@@ -83,7 +95,7 @@ class RecipeDetails extends StatelessWidget {
                     width: 4,
                   ),
                   Text(
-                    "cooking time",
+                    btime.toString(),
                   ),
                   SizedBox(
                     width: 20,
@@ -97,7 +109,7 @@ class RecipeDetails extends StatelessWidget {
                     width: 10,
                   ),
                   Text(
-                    "n " + ' Servings',
+                    bserve.toString() + ' Servings',
                   ),
                 ],
               ),
@@ -157,7 +169,7 @@ class RecipeDetails extends StatelessWidget {
                                     ListView.separated(
                                       shrinkWrap: true,
                                       physics: ScrollPhysics(),
-                                      itemCount: ingredientlist.length,
+                                      itemCount: bingredientlist.length,
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         return Padding(
@@ -165,7 +177,7 @@ class RecipeDetails extends StatelessWidget {
                                             vertical: 2.0,
                                           ),
                                           child: Text(
-                                              ingredientlist[index]['name']),
+                                              bingredientlist[index]['name']),
                                         );
                                       },
                                       separatorBuilder:
@@ -205,7 +217,7 @@ class RecipeDetails extends StatelessWidget {
                     tag: "recipeModel.imgPath",
                     child: ClipRRect(
                       child: Image.network(
-                        "https://solidstarts.com/wp-content/uploads/when-can-babies-eat-eggs-480x320.jpg",
+                        breakfastimg,
                         width: double.infinity,
                         height: (size.height / 2) + 50,
                         fit: BoxFit.cover,
