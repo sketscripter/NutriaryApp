@@ -82,12 +82,11 @@ class RecommendedMealPlan extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(0.0),
               child: Card(
                 clipBehavior: Clip.antiAlias,
                 child: FlatButton(
                   onPressed: () {
-                    
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -103,21 +102,30 @@ class RecommendedMealPlan extends StatelessWidget {
                           ),
                         ));
                   },
-                  child: Column(
+                  child: Row(
                     children: [
                       Padding(
-                        padding: EdgeInsets.fromLTRB(100, 10, 100, 5),
-                        child: Text(
-                          " Breakfast - $breakfast",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        child: AspectRatio(
+                          aspectRatio: 3 / 4,
+                          child: Text(
+                            "Breakfast \n$breakfast ",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
                       Expanded(
-                        child: Image(
-                          image: NetworkImage(
-                            breakfastimg,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                          child: AspectRatio(
+                            aspectRatio: 1 / 1,
+                            child: Image(
+                              image: NetworkImage(
+                                breakfastimg,
+                              ),
+                              fit: BoxFit.fill,
+                            ),
                           ),
-                          fit: BoxFit.fill,
                         ),
                       )
                     ],
@@ -128,12 +136,11 @@ class RecommendedMealPlan extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(0.0),
               child: Card(
                 clipBehavior: Clip.antiAlias,
                 child: FlatButton(
                   onPressed: () {
-                    
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -149,21 +156,30 @@ class RecommendedMealPlan extends StatelessWidget {
                           ),
                         ));
                   },
-                  child: Column(
+                  child: Row(
                     children: [
                       Padding(
-                        padding: EdgeInsets.fromLTRB(100, 10, 100, 5),
-                        child: Text(
-                          " Lunch - $lunch",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        child: AspectRatio(
+                          aspectRatio: 3 / 4,
+                          child: Text(
+                            "Lunch \n$lunch ",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
                       Expanded(
-                        child: Image(
-                          image: NetworkImage(
-                            lunchimg,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                          child: AspectRatio(
+                            aspectRatio: 1 / 1,
+                            child: Image(
+                              image: NetworkImage(
+                                lunchimg,
+                              ),
+                              fit: BoxFit.fill,
+                            ),
                           ),
-                          fit: BoxFit.fill,
                         ),
                       )
                     ],
@@ -174,12 +190,11 @@ class RecommendedMealPlan extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(0.0),
               child: Card(
                 clipBehavior: Clip.antiAlias,
                 child: FlatButton(
                   onPressed: () {
-                    
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -195,21 +210,30 @@ class RecommendedMealPlan extends StatelessWidget {
                           ),
                         ));
                   },
-                  child: Column(
+                  child: Row(
                     children: [
                       Padding(
-                        padding: EdgeInsets.fromLTRB(100, 10, 100, 5),
-                        child: Text(
-                          " Dinner - $dinner",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        child: AspectRatio(
+                          aspectRatio: 3 / 4,
+                          child: Text(
+                            "Dinner \n$dinner ",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
                       Expanded(
-                        child: Image(
-                          image: NetworkImage(
-                            dinnerimg,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                          child: AspectRatio(
+                            aspectRatio: 1 / 1,
+                            child: Image(
+                              image: NetworkImage(
+                                dinnerimg,
+                              ),
+                              fit: BoxFit.fill,
+                            ),
                           ),
-                          fit: BoxFit.fill,
                         ),
                       )
                     ],
@@ -219,7 +243,7 @@ class RecommendedMealPlan extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(0.0),
             child: Card(
               clipBehavior: Clip.antiAlias,
               child: Row(
