@@ -1,5 +1,4 @@
 import 'package:chatapp/recipe/RecipeDetails.dart';
-import 'package:chatapp/recipe/RecipeMode.dart';
 import 'package:flutter/material.dart';
 
 import 'loginPage.dart';
@@ -22,6 +21,20 @@ class RecommendedMealPlan extends StatelessWidget {
   final btime;
   final bserve;
   final bsummary;
+  final lingredients;
+  final ltitle;
+  final lsource;
+  final lscore;
+  final ltime;
+  final lserve;
+  final lsummary;
+  final dingredients;
+  final dtitle;
+  final dsource;
+  final dscore;
+  final dtime;
+  final dserve;
+  final dsummary;
 
   RecommendedMealPlan({
     this.breakfast,
@@ -41,6 +54,20 @@ class RecommendedMealPlan extends StatelessWidget {
     this.btime,
     this.bserve,
     this.bsummary,
+    this.lingredients,
+    this.ltitle,
+    this.lsource,
+    this.lscore,
+    this.ltime,
+    this.lserve,
+    this.lsummary,
+    this.dingredients,
+    this.dtitle,
+    this.dsource,
+    this.dscore,
+    this.dtime,
+    this.dserve,
+    this.dsummary,
   });
   @override
   Widget build(BuildContext context) {
@@ -58,34 +85,9 @@ class RecommendedMealPlan extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               child: Card(
                 clipBehavior: Clip.antiAlias,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(100, 10, 100, 5),
-                      child: Text(
-                        " Breakfast - $breakfast",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    Expanded(
-                      child: Image(
-                        image: NetworkImage(breakfastimg),
-                        fit: BoxFit.fill,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Card(
-                clipBehavior: Clip.antiAlias,
                 child: FlatButton(
                   onPressed: () {
-                    print(bingredients);
+                    
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -98,6 +100,52 @@ class RecommendedMealPlan extends StatelessWidget {
                             bserve: bserve,
                             breakfastimg: breakfastimg,
                             bsummary: bsummary,
+                          ),
+                        ));
+                  },
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(100, 10, 100, 5),
+                        child: Text(
+                          " Breakfast - $breakfast",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Expanded(
+                        child: Image(
+                          image: NetworkImage(
+                            breakfastimg,
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Card(
+                clipBehavior: Clip.antiAlias,
+                child: FlatButton(
+                  onPressed: () {
+                    
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RecipeDetails(
+                            bingredientlist: lingredients,
+                            btitle: ltitle,
+                            bsource: lsource,
+                            bscore: lscore,
+                            btime: ltime,
+                            bserve: lserve,
+                            breakfastimg: lunchimg,
+                            bsummary: lsummary,
                           ),
                         ));
                   },
@@ -129,22 +177,43 @@ class RecommendedMealPlan extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               child: Card(
                 clipBehavior: Clip.antiAlias,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(100, 10, 100, 5),
-                      child: Text(
-                        " Dinner - $dinner",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                child: FlatButton(
+                  onPressed: () {
+                    
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RecipeDetails(
+                            bingredientlist: dingredients,
+                            btitle: dtitle,
+                            bsource: dsource,
+                            bscore: dscore,
+                            btime: dtime,
+                            bserve: dserve,
+                            breakfastimg: dinnerimg,
+                            bsummary: dsummary,
+                          ),
+                        ));
+                  },
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(100, 10, 100, 5),
+                        child: Text(
+                          " Dinner - $dinner",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: Image(
-                        image: NetworkImage(dinnerimg),
-                        fit: BoxFit.fill,
-                      ),
-                    )
-                  ],
+                      Expanded(
+                        child: Image(
+                          image: NetworkImage(
+                            dinnerimg,
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

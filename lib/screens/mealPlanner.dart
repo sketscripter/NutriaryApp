@@ -49,6 +49,20 @@ class _MealPlannerState extends State<MealPlanner> {
   int _bserve;
   List<dynamic> bingredients;
   String bsummary;
+  String _ltitle;
+  String _lsource;
+  double _lscore;
+  int _ltime;
+  int _lserve;
+  List<dynamic> lingredients;
+  String lsummary;
+  String _dtitle;
+  String _dsource;
+  double _dscore;
+  int _dtime;
+  int _dserve;
+  List<dynamic> dingredients;
+  String dsummary;
 
   Future getData(double target, String diet) async {
     NetworkHelper networkHelper = NetworkHelper(
@@ -60,17 +74,9 @@ class _MealPlannerState extends State<MealPlanner> {
             diet +
             '&timeFrame=day');
 
-    print(_url +
-        _apiKey +
-        '&targetCalories=' +
-        target.toString() +
-        '&diet=' +
-        diet +
-        '&timeFrame=day');
     var response = await networkHelper.getData();
 
     if (response != null) {
-      print(response);
       _breakfast = response['meals'][0]['title'];
       _lunch = response['meals'][1]['title'];
       _dinner = response['meals'][2]['title'];
@@ -88,14 +94,9 @@ class _MealPlannerState extends State<MealPlanner> {
             '/information?apiKey=' +
             _apiKey +
             '&includeNutrition=false');
-    print(_url2 +
-        response['meals'][0]['id'].toString() +
-        '/information?apiKey=' +
-        _apiKey +
-        '&includeNutrition=false');
+
     var response2 = await networkHelper2.getData();
     if (response2 != null) {
-      print(response2);
       _breakfastimg = response2['image'].toString();
       bingredients = response2['extendedIngredients'];
       _btitle = response2['title'];
@@ -116,15 +117,17 @@ class _MealPlannerState extends State<MealPlanner> {
             '/information?apiKey=' +
             _apiKey +
             '&includeNutrition=false');
-    print(_url2 +
-        response['meals'][1]['id'].toString() +
-        '/information?apiKey=' +
-        _apiKey +
-        '&includeNutrition=false');
+
     var response3 = await networkHelper3.getData();
     if (response3 != null) {
-      print(response3);
       _lunchimg = response3['image'].toString();
+      lingredients = response3['extendedIngredients'];
+      _ltitle = response3['title'];
+      _lsource = response3['sourceName'];
+      _lscore = response3['spoonacularScore'];
+      _ltime = response3['readyInMinutes'];
+      _lserve = response3['servings'];
+      lsummary = response3['summary'];
 
       setState(() {
         _showSpinner = false;
@@ -137,15 +140,17 @@ class _MealPlannerState extends State<MealPlanner> {
             '/information?apiKey=' +
             _apiKey +
             '&includeNutrition=false');
-    print(_url2 +
-        response['meals'][2]['id'].toString() +
-        '/information?apiKey=' +
-        _apiKey +
-        '&includeNutrition=false');
+
     var response4 = await networkHelper4.getData();
     if (response4 != null) {
-      print(response4);
       _dinnerimg = response4['image'].toString();
+      dingredients = response4['extendedIngredients'];
+      _dtitle = response4['title'];
+      _dsource = response4['sourceName'];
+      _dscore = response4['spoonacularScore'];
+      _dtime = response4['readyInMinutes'];
+      _dserve = response4['servings'];
+      dsummary = response4['summary'];
 
       setState(() {
         _showSpinner = false;
@@ -285,6 +290,20 @@ class _MealPlannerState extends State<MealPlanner> {
                                   btime: _btime,
                                   bserve: _bserve,
                                   bsummary: bsummary,
+                                  lingredients: lingredients,
+                                  ltitle: _ltitle,
+                                  lsource: _lsource,
+                                  lscore: _lscore,
+                                  ltime: _ltime,
+                                  lserve: _lserve,
+                                  lsummary: lsummary,
+                                  dingredients: dingredients,
+                                  dtitle: _dtitle,
+                                  dsource: _dsource,
+                                  dscore: _dscore,
+                                  dtime: _dtime,
+                                  dserve: _dserve,
+                                  dsummary: dsummary,
                                 )));
                   },
                 ),
